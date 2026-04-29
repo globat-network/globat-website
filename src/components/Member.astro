@@ -21,32 +21,34 @@ const { member } = Astro.props;
 const { Content } = await render(member);
 ---
 
-<Card>
-  <CardHeader className="flex flex-col items-center space-y-2 text-center">
+<Card className="border-none bg-transparent shadow-none">
+  <CardHeader className="flex flex-col items-center space-y-2.5 text-center">
     {
       member.data.image && (
         <img
           src={member.data.image.src}
           alt={member.data.imageAlt ?? member.data.name}
-          class="h-56 w-56 rounded-full object-cover ring-2 ring-gray-200"
+          class="h-44 w-44 rounded-full object-cover ring-1 ring-black/10 dark:ring-white/10"
         />
       )
     }
-    <CardTitle className="text-lg font-semibold">{member.data.name}</CardTitle>
-    <CardDescription className="text-muted-foreground text-sm">
+    <CardTitle className="max-w-[14rem] text-xl font-semibold tracking-tight text-balance">
+      {member.data.name}
+    </CardTitle>
+    <CardDescription className="max-w-[15rem] text-sm leading-5 text-foreground/65">
       {member.data.institution}
     </CardDescription>
   </CardHeader>
 
-  <CardContent className="prose prose-sm text-muted-foreground text-center">
+  <CardContent className="prose prose-sm mx-auto max-w-[15rem] pt-4 text-left text-muted-foreground">
     <Content />
   </CardContent>
 
   {
     member.data.links && (
-      <CardFooter className="flex flex-wrap justify-center gap-3">
+      <CardFooter className="mx-auto flex max-w-[15rem] flex-wrap justify-start gap-x-4 gap-y-2 pt-2">
         {Object.entries(member.data.links).map(([name, link]) => (
-          <ExternalLink href={link} class="text-sm font-medium">
+          <ExternalLink href={link}>
             {name}
           </ExternalLink>
         ))}

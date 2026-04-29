@@ -45,8 +45,8 @@ export default function MapRenderer({ counts }: MapProps) {
 
   const projection = d3.geoMercator().fitExtent(
     [
-      [12, 20],
-      [dimensions.width - 12, dimensions.height - 20],
+      [4, 10],
+      [dimensions.width - 4, dimensions.height - 10],
     ],
     geoData,
   );
@@ -63,6 +63,9 @@ export default function MapRenderer({ counts }: MapProps) {
   const mapWidth = bounds[1][0] - bounds[0][0];
   const offsetX = (dimensions.width - mapWidth) / 2 - bounds[0][0];
   const offsetY = (dimensions.height - mapHeight) / 2 - bounds[0][1];
+  const scale = 1.4;
+  const centerX = dimensions.width / 2;
+  const centerY = dimensions.height / 2;
 
   const allSvgPaths = filteredFeatures.map((shape) => {
     const name = getName(shape.id);
@@ -70,7 +73,7 @@ export default function MapRenderer({ counts }: MapProps) {
 
     const className =
       regionData > 0
-        ? "fill-sky-500 dark:fill-sky-400"
+        ? "fill-teal-500 dark:fill-teal-400"
         : "fill-neutral-200 dark:fill-neutral-800";
 
     return (
@@ -99,7 +102,11 @@ export default function MapRenderer({ counts }: MapProps) {
         preserveAspectRatio="xMidYMid meet"
         className="block h-full w-full stroke-neutral-400 dark:stroke-neutral-700"
       >
-        <g transform={`translate(${offsetX}, ${offsetY})`}>{allSvgPaths}</g>
+        <g
+          transform={`translate(${centerX}, ${centerY}) scale(${scale}) translate(${-centerX + offsetX}, ${-centerY + offsetY})`}
+        >
+          {allSvgPaths}
+        </g>
       </svg>
     </div>
   );
