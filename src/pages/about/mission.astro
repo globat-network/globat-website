@@ -136,19 +136,19 @@ const principles = [
           Priorities
         </p>
         <h2 class={headingStyles}>Our Objectives</h2>
-        <div class="mt-10 grid gap-5 text-left md:grid-cols-2">
+        <div class="mt-10 grid gap-x-8 gap-y-10 text-left md:grid-cols-2">
           {
             objectives.map((objective) => (
               <article class="flex h-full flex-col gap-5 px-2 py-2">
                 <div class="flex items-start gap-5">
-                  <div class="flex size-16 shrink-0 items-center justify-center text-foreground">
-                    <objective.icon className="size-8 stroke-[1.75]" />
+                  <div class="flex size-14 shrink-0 items-center justify-center text-muted-foreground">
+                    <objective.icon className="size-7 stroke-[1.6]" />
                   </div>
                   <h3 class="text-xl font-semibold tracking-tight text-foreground">
                     {objective.title}
                   </h3>
                 </div>
-                <p class="text-base leading-8 text-muted-foreground">
+                <p class="text-lg leading-8 text-foreground/80">
                   {objective.description}
                 </p>
               </article>
@@ -157,27 +157,27 @@ const principles = [
         </div>
       </section>
 
-      <section class="text-center">
+      <section class="pt-6 text-center sm:pt-10">
         <p class="text-sm font-semibold tracking-[0.18em] text-muted-foreground uppercase">
           How We Work
         </p>
         <h2 class={headingStyles}>Working Principles</h2>
-        <p class="mx-auto mt-6 max-w-3xl text-left text-base leading-8 text-muted-foreground sm:text-lg">
+        <p class="mx-auto mt-6 max-w-3xl text-left text-lg leading-8 text-foreground/80">
           These principles guide our decision making and working philosophy.
         </p>
-        <div class="mx-auto mt-10 grid max-w-4xl gap-5 text-left">
+        <div class="mx-auto mt-10 grid max-w-4xl gap-10 text-left">
           {
             principles.map((principle) => (
               <article class="flex flex-col gap-5 px-2 py-2 sm:px-4">
                 <div class="flex items-start gap-4">
-                  <div class="flex h-8 w-8 shrink-0 items-start justify-center pt-0.5 text-foreground">
-                    <principle.icon className="size-7 stroke-[1.75]" />
+                  <div class="flex h-8 w-8 shrink-0 items-start justify-center pt-0.5 text-muted-foreground">
+                    <principle.icon className="size-6 stroke-[1.6]" />
                   </div>
                   <h3 class="pt-0.5 text-xl font-semibold tracking-tight text-foreground">
                     {principle.title}
                   </h3>
                 </div>
-                <div class="space-y-4 text-base leading-8 text-muted-foreground">
+                <div class="space-y-4 text-lg leading-8 text-foreground/80">
                   {principle.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
                 </div>
               </article>
