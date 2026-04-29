@@ -8,7 +8,7 @@ export function MobileNav({ links }: { links: NavigationLink[] }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="md:hidden">
+    <nav aria-label="Main" className="md:hidden">
       <button
         type="button"
         aria-expanded={isOpen}
@@ -59,6 +59,6 @@ export function MobileNav({ links }: { links: NavigationLink[] }) {
           </ul>
         </div>
       )}
-    </div>
+    </nav>
   );
 }
