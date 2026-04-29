@@ -14,75 +14,92 @@ function getName(code: string): string {
 
 export default function MapRenderer({ counts }: MapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const aspectRatio = 16 / 9;
 
-  // 2. State to store the container's dimensions
   const [dimensions, setDimensions] = useState<{
     width: number;
     height: number;
   }>({
     width: 0,
-    height: 400, // You can set a default height or calculate it
+    height: 0,
   });
 
-  // 3. This useEffect hook will run once to set up the observer
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    // Create a ResizeObserver to watch for size changes
     const observer = new ResizeObserver((entries) => {
       for (const entry of entries) {
-        const { width, height } = entry.contentRect;
-        // Update the dimensions state
-        setDimensions({ width, height });
+        const { width } = entry.contentRect;
+        setDimensions({
+          width,
+          height: width / aspectRatio,
+        });
       }
     });
 
     observer.observe(container);
 
-    // Cleanup function to disconnect the observer when the component unmounts
     return () => observer.disconnect();
-  }, []); // Empty dependency array means this runs once on mount
+  }, []);
 
-
-  const projection = d3
-    .geoMercator()
-    .fitSize([dimensions.width, dimensions.height], geoData);
+  const projection = d3.geoMercator().fitExtent(
+    [
+      [12, 20],
+      [dimensions.width - 12, dimensions.height - 20],
+    ],
+    geoData,
+  );
 
   const geoPathGenerator = d3.geoPath().projection(projection);
+  const filteredFeatures = geoData.features.filter(
+    (shape) => shape.id !== "ATA",
+  );
+  const bounds = geoPathGenerator.bounds({
+    type: "FeatureCollection",
+    features: filteredFeatures,
+  });
+  const mapHeight = bounds[1][1] - bounds[0][1];
+  const mapWidth = bounds[1][0] - bounds[0][0];
+  const offsetX = (dimensions.width - mapWidth) / 2 - bounds[0][0];
+  const offsetY = (dimensions.height - mapHeight) / 2 - bounds[0][1];
 
-  const allSvgPaths = geoData.features
-    .filter((shape) => shape.id !== "ATA")
-    .map((shape) => {
-      const name = getName(shape.id);
-      const regionData = counts[name];
+  const allSvgPaths = filteredFeatures.map((shape) => {
+    const name = getName(shape.id);
+    const regionData = counts[name];
 
-      const className = regionData > 0 ? "fill-white" : "fill-neutral-500";
+    const className =
+      regionData > 0
+        ? "fill-sky-500 dark:fill-sky-400"
+        : "fill-neutral-200 dark:fill-neutral-800";
 
-      return (
-        <path
-          key={shape.id}
-          d={geoPathGenerator(shape)}
-          className={className}
-          fillOpacity={1}
-        />
-      );
-    });
+    return (
+      <path
+        key={shape.id}
+        d={geoPathGenerator(shape)}
+        className={className}
+        fillOpacity={1}
+      />
+    );
+  });
 
   if (!dimensions.width) {
     return (
-      <div ref={containerRef} style={{ width: "100%", height: "600px" }} />
+      <div
+        ref={containerRef}
+        className="bg-muted/40 aspect-[16/9] w-full rounded-[1.25rem]"
+      />
     );
   }
 
   return (
-    <div ref={containerRef} style={{ width: "100%", height: "100%" }}>
+    <div ref={containerRef} className="aspect-[16/9] w-full">
       <svg
-        width={dimensions.width}
-        height={dimensions.height}
-        className="stroke-neutral-500"
+        viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
+        preserveAspectRatio="xMidYMid meet"
+        className="block h-full w-full stroke-neutral-400 dark:stroke-neutral-700"
       >
-        {allSvgPaths}
+        <g transform={`translate(${offsetX}, ${offsetY})`}>{allSvgPaths}</g>
       </svg>
     </div>
   );

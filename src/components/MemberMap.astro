@@ -6,4 +6,6 @@ const members = await getMembers();
 const countries = getMemberCountsByCountry(members);
 ---
 
-<MapRenderer client:only counts={countries} />
+<div class="block leading-none">
+  <MapRenderer client:only counts={countries} />
+</div>
