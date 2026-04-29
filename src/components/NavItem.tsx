@@ -24,10 +24,10 @@ export function NavItem({ link }: { link: NavigationLink }) {
     <NavigationMenuItem>
       <NavigationMenuTrigger>{link.label}</NavigationMenuTrigger>
       <NavigationMenuContent>
-        <ul className="grid gap-4 w-[200px]">
-          <li>
+        <ul className="grid w-[220px] gap-1">
+          <li className="grid gap-1">
             {Object.values(link.pages).map((page) => (
-              <NavigationMenuLink asChild>
+              <NavigationMenuLink key={page.path} asChild>
                 <a href={page.path}>{page.label}</a>
               </NavigationMenuLink>
             ))}

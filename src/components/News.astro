@@ -7,11 +7,13 @@ const posts = (await getCollection("news")).sort(
 );
 ---
 
-<section class="py-3">
-  <h2 class="text-muted-text dark:text-dark-muted-text mb-3 text-lg font-bold">
-    News
-  </h2>
-  <div class="grid list-none gap-4 p-0">
-    {posts.map((post) => <Post post={post} />)}
+<section class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+  <div class="max-w-3xl">
+    <h2 class="text-muted-text dark:text-dark-muted-text mb-4 text-lg font-bold">
+      News
+    </h2>
+    <div class="grid list-none gap-4 p-0">
+      {posts.map((post) => <Post post={post} />)}
+    </div>
   </div>
 </section>
