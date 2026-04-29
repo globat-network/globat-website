@@ -10,13 +10,16 @@ import batImage from "@/images/bats/TrachopsMaslowski-5.jpg";
 <BaseLayout>
   <SeoPage slot="head" />
 
-  <div class="py-16 text-center sm:py-16">
+  <div class="py-14 text-center sm:py-16">
     <div class="mx-auto max-w-4xl px-4">
-      <h1 class="text-4xl font-bold tracking-tight sm:text-6xl">
+      <p class="text-sm font-semibold tracking-[0.18em] text-muted-foreground uppercase">
+        Global Research Network
+      </p>
+      <h1 class="mt-4 text-4xl font-semibold tracking-tight sm:text-6xl">
         Advancing Bat Conservation Through Artificial Intelligence
       </h1>
 
-      <p class="mt-6 text-lg leading-8">
+      <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-foreground/80">
         GloBat is a scientific collaboration network accelerating the
         development and application of AI tools for bat acoustic monitoring and
         research. We bring together a diverse, global community of researchers,
@@ -25,15 +28,18 @@ import batImage from "@/images/bats/TrachopsMaslowski-5.jpg";
         behaviour.
       </p>
 
-      <div class="mt-10 flex items-center justify-center gap-x-6">
+      <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-x-5 sm:gap-y-0">
         <a
           href="/contact/membership"
-          class="rounded-md border border-transparent bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-zinc-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
+          class="inline-flex min-h-11 items-center justify-center rounded-full bg-foreground px-5 py-3 text-sm font-semibold text-background transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
         >
           Become a Member
         </a>
-        <a href="/about/mission" class="text-sm leading-6 font-semibold">
-          Learn more <span aria-hidden="true">→</span>
+        <a
+          href="/about/mission"
+          class="inline-flex min-h-11 items-center justify-center text-sm font-semibold text-foreground/80 transition hover:text-foreground"
+        >
+          Learn more <span aria-hidden="true" class="ml-1">→</span>
         </a>
       </div>
 
