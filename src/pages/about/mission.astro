@@ -1,16 +1,81 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
+import {
+  Blocks,
+  BookOpen,
+  Handshake,
+  Network,
+  Orbit,
+  Sparkles,
+  Users,
+} from "lucide-react";
 
 import SeoPage from "@/components/SeoPage.astro";
 import { Content as VisionContent } from "@/content/about/vision.md";
 import { Content as MissionContent } from "@/content/about/mission.md";
-import { Content as ObjectivesContent } from "@/content/about/objectives.md";
-import { Content as PrinciplesContent } from "@/content/about/principles.md";
 
 import batImage from "@/images/bats/TrachopsMaslowski-25-3.jpg";
 import batImage2 from "@/images/bats/TrachopsMaslowski-5.jpg";
-const headingStyles = "text-3xl font-bold tracking-tight sm:text-4xl underline";
+const headingStyles = "text-3xl font-semibold tracking-tight sm:text-4xl";
+
+const objectives = [
+  {
+    title: "To Establish and Promote Open Standards.",
+    description:
+      "To foster the sharing of acoustic data and annotations in open, accessible formats by collaboratively defining and promoting best practices that ensure our collective work is interoperable, reproducible, and provides maximum value to the global research and conservation community.",
+    icon: Blocks,
+  },
+  {
+    title: "To Advance the Development and Dissemination of AI Tools.",
+    description:
+      "To serve as a hub for co-developing, sharing, and discussing open-source AI tools for acoustic monitoring of bats, and to facilitate the exchange of code, models, and expertise to accelerate innovation and ensure powerful tools are freely available to all.",
+    icon: Sparkles,
+  },
+  {
+    title: "To Cultivate a Collaborative and Inclusive Community.",
+    description:
+      "To connect researchers, conservationists, and AI experts from around the world by providing a platform that fosters new partnerships, facilitates knowledge sharing, and supports members' projects while respecting individual and institutional autonomy.",
+    icon: Network,
+  },
+  {
+    title: "To Empower the Community Through Knowledge Sharing.",
+    description:
+      "To bridge the gap between complex AI methods and practical bat conservation action by creating and distributing accessible resources, tutorials, and case studies that help practitioners turn acoustic data into ecological insights.",
+    icon: BookOpen,
+  },
+];
+
+const principles = [
+  {
+    title: "Diversity",
+    paragraphs: [
+      "As a community passionate about biodiversity, we naturally value and support human diversity, embracing all differences.",
+      "We believe the most effective science arises from the convergence of diverse perspectives and experiences.",
+      "We're committed to fostering an inclusive environment for everyone, regardless of race, religion, creed, colour, gender (including transgender, gender identity, and gender expression), sexual orientation, medical condition, physical or intellectual disability, pregnancy, or national origin/ancestry.",
+    ],
+    icon: Users,
+  },
+  {
+    title: "Fair Collaborations",
+    paragraphs: [
+      "Acknowledging science's embeddedness within socio-political systems and its inherent power relationships, we commit to fostering non-colonial, synergistic, long-term, and mutually beneficial collaborations that amplify our community's full capabilities.",
+      "We strongly advocate for equitable resource sharing as a means to balance inequalities.",
+      "Our goal is to ensure researchers can participate in every stage of the scientific process without being influenced by power dynamics like university prestige, funding access, or research incentives.",
+    ],
+    icon: Handshake,
+  },
+  {
+    title: "Open-science",
+    paragraphs: [
+      "Our community actively promotes and enables open access to resources across all stages of scientific research.",
+      "We champion open data, open code, and open models as fundamental tools for advancing our shared goals and ensuring transparency.",
+      "While promoting openness, we also insist on proper attribution for all creators and owners of these resources.",
+      "Our core belief is that shared resources should contribute to the collective benefit of the community, rather than serving individual or narrow group interests.",
+    ],
+    icon: Orbit,
+  },
+];
 ---
 
 <BaseLayout>
@@ -20,20 +85,23 @@ const headingStyles = "text-3xl font-bold tracking-tight sm:text-4xl underline";
     description="Learn about the mission, vision, and principles of the GloBat network."
   />
 
-  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-    <div class="space-y-24 md:space-y-32">
-      <section class="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+    <div class="space-y-20 md:space-y-28">
+      <section class="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12">
         <div>
           <Image
             src={batImage}
             alt="Close-up of a bat in its natural habitat."
             class="w-full object-cover"
           />
-          <p class="mt-2 text-xs text-gray-500 italic">
+          <p class="mt-3 text-xs italic text-muted-foreground">
             Photo by Grant Maslowski
           </p>
         </div>
         <div>
+          <p class="text-sm font-semibold tracking-[0.18em] text-muted-foreground uppercase">
+            About GloBat
+          </p>
           <h2 class={headingStyles}>Our Mission</h2>
           <div class="prose prose-lg mt-6 max-w-none">
             <MissionContent />
@@ -41,8 +109,11 @@ const headingStyles = "text-3xl font-bold tracking-tight sm:text-4xl underline";
         </div>
       </section>
 
-      <section class="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
+      <section class="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12">
         <div>
+          <p class="text-sm font-semibold tracking-[0.18em] text-muted-foreground uppercase">
+            Shared Direction
+          </p>
           <h2 class={headingStyles}>Our Vision</h2>
           <div class="prose prose-lg mt-6 max-w-none">
             <VisionContent />
@@ -54,23 +125,64 @@ const headingStyles = "text-3xl font-bold tracking-tight sm:text-4xl underline";
             alt="Close-up of a bat in its natural habitat."
             class="w-full object-cover"
           />
-          <p class="mt-2 text-xs text-gray-500 italic">
+          <p class="mt-3 text-xs italic text-muted-foreground">
             Photo by Grant Maslowski
           </p>
         </div>
       </section>
 
       <section class="text-center">
+        <p class="text-sm font-semibold tracking-[0.18em] text-muted-foreground uppercase">
+          Priorities
+        </p>
         <h2 class={headingStyles}>Our Objectives</h2>
-        <div class="prose prose-lg mx-auto mt-6 max-w-3xl">
-          <ObjectivesContent />
+        <div class="mt-10 grid gap-5 text-left md:grid-cols-2">
+          {
+            objectives.map((objective) => (
+              <article class="flex h-full flex-col gap-5 px-2 py-2">
+                <div class="flex items-start gap-5">
+                  <div class="flex size-16 shrink-0 items-center justify-center text-foreground">
+                    <objective.icon className="size-8 stroke-[1.75]" />
+                  </div>
+                  <h3 class="text-xl font-semibold tracking-tight text-foreground">
+                    {objective.title}
+                  </h3>
+                </div>
+                <p class="text-base leading-8 text-muted-foreground">
+                  {objective.description}
+                </p>
+              </article>
+            ))
+          }
         </div>
       </section>
 
       <section class="text-center">
+        <p class="text-sm font-semibold tracking-[0.18em] text-muted-foreground uppercase">
+          How We Work
+        </p>
         <h2 class={headingStyles}>Working Principles</h2>
-        <div class="prose prose-lg mx-auto mt-6 max-w-3xl">
-          <PrinciplesContent />
+        <p class="mx-auto mt-6 max-w-3xl text-left text-base leading-8 text-muted-foreground sm:text-lg">
+          These principles guide our decision making and working philosophy.
+        </p>
+        <div class="mx-auto mt-10 grid max-w-4xl gap-5 text-left">
+          {
+            principles.map((principle) => (
+              <article class="flex flex-col gap-5 px-2 py-2 sm:px-4">
+                <div class="flex items-start gap-4">
+                  <div class="flex h-8 w-8 shrink-0 items-start justify-center pt-0.5 text-foreground">
+                    <principle.icon className="size-7 stroke-[1.75]" />
+                  </div>
+                  <h3 class="pt-0.5 text-xl font-semibold tracking-tight text-foreground">
+                    {principle.title}
+                  </h3>
+                </div>
+                <div class="space-y-4 text-base leading-8 text-muted-foreground">
+                  {principle.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+                </div>
+              </article>
+            ))
+          }
         </div>
       </section>
     </div>
