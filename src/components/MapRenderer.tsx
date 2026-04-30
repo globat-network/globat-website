@@ -82,6 +82,7 @@ export default function MapRenderer({ counts }: MapProps) {
         d={geoPathGenerator(shape)}
         className={className}
         fillOpacity={1}
+        strokeWidth={0.4}
       />
     );
   });
