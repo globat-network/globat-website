@@ -23,11 +23,13 @@ function parseSkills(skills: string): string[] {
 }
 
 function parseCountry(country: string): string {
+  country = country.trim();
+
   let country_mapping: Record<string, string> = {
     UK: "United Kingdom",
     USA: "United States",
     Türkiye: "Turkey",
-    "Vietnam": "Viet Nam",
+    Vietnam: "Viet Nam",
   };
 
   return country_mapping[country] || country;
